@@ -1,3 +1,4 @@
+import datetime as dt
 import json
 import boto3
 import urllib.request
@@ -8,9 +9,9 @@ ses = boto3.client('ses')
 
 sender = 'Galen <galen.swint@gmail.com>'
 recipient = 'The Bear <gssbear@gmail.com>'
-recipient_list = [recipient]
+recipient_list = [recipient, 'melissa.swint@gmail.com', 'galen.swint@gmail.com']
 
-subject = "Today's PowCam."
+subject = "PowCam for "
 
 
 def get_picture():
@@ -22,21 +23,26 @@ def get_picture():
     return picture
 
 def build_email():
+    now = dt.datetime.now(tz=dt.timezone(dt.timedelta(hours=-7)))
+    time_is = f'{now.year}/{now.month:02}/{now.day:02} at {now.hour}:{now.minute} MDT'
+    day_is = f'{now.year}/{now.month:02}/{now.day:02}'
+    
     msg = EmailMessage()
 
     msg['From'] = sender
     msg['To'] = recipient
-    msg['Subject'] = subject
+    msg['Subject'] = subject + f" {day_is}"
     msg.preamble = 'Trying out a send.'
     msg.set_content = "Hello. Today's PowCam grab. Maybe."
     
     powcam_cid = make_msgid()
     stripped_powcam_cid = powcam_cid[1:-1]
+    
     html_msg = f'''
         <html>
         <head />
         <body>
-        <p>PowCam from today. Maybe.</p>
+        <p>PowCam from {time_is}. Maybe.</p>
         <img src="cid:{stripped_powcam_cid}"
         </bod>
         </html>'''
