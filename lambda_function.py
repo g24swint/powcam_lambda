@@ -10,9 +10,8 @@ sender = 'Galen <galen.swint@gmail.com>'
 recipient = 'The Bear <gssbear@gmail.com>'
 recipient_list = [recipient]
 
-subject = "Today's PowCam. Amazon SES test (sdk in lambda)"
+subject = "Today's PowCam."
 
-counter = 0
 
 def get_picture():
     url = 'http://skicb.server310.com/ftp/powcam/pow.jpg'
@@ -51,25 +50,7 @@ def build_email():
     return msg
 
 def lambda_handler(event, context):
-    # TODO implement
-    global counter
-    
-    counter = counter+1
-    
-    body_text = f'Simple email send #{counter} through SES.'
-    
-    # pow_cam_picture = get_picture()
-    
-    email_dict = {'Source': sender,
-        'Destination': {'ToAddresses': recipient_list},
-        'Message': {
-            'Subject': {'Data':subject}, 
-            'Body': {'Text': {'Data': body_text}},
-        },
-    }
-        
-    # response = ses.send_email(**email_dict)
-    
+
     built_message = build_email()
     
     response = ses.send_raw_email(Source=sender,
