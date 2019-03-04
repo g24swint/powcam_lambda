@@ -10,7 +10,11 @@ ses = boto3.client('ses')
 sender = 'Galen Live <swintgs@live.com>'
 recipient = 'TheBear <gssbear@gmail.com>'
 recipient_list = ['melissa.swint@gmail.com', 'galen.swint@gmail.com',
-    'henrylinhart@hotmail.com']
+    'henrylinhart@hotmail.com',
+    'graham.s.swint@gmail.com',
+    'hannah.c.swint@gmail.com',
+    'laurel.a.swint@gmail.com',
+    ]
 
 subject = "PowCam for "
 
