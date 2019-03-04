@@ -7,9 +7,10 @@ from email.utils import make_msgid
 
 ses = boto3.client('ses')
 
-sender = 'Galen <galen.swint@gmail.com>'
-recipient = 'The Bear <gssbear@gmail.com>'
-recipient_list = [recipient, 'melissa.swint@gmail.com', 'galen.swint@gmail.com']
+sender = 'Galen Live <swintgs@live.com>'
+recipient = 'TheBear <gssbear@gmail.com>'
+recipient_list = ['melissa.swint@gmail.com', 'galen.swint@gmail.com',
+    'henrylinhart@hotmail.com']
 
 subject = "PowCam for "
 
@@ -30,7 +31,7 @@ def build_email():
     msg = EmailMessage()
 
     msg['From'] = sender
-    msg['To'] = recipient
+    msg['To'] = ', '.join(recipient_list)
     msg['Subject'] = subject + f" {day_is}"
     msg.preamble = 'Trying out a send.'
     msg.set_content = "Hello. Today's PowCam grab. Maybe."
@@ -43,6 +44,8 @@ def build_email():
         <head />
         <body>
         <p>PowCam from {time_is}. Maybe.</p>
+        <p><a href="http://www.skicb.com/the-mountain/web-cams">Link to the 
+        Crested Butte Webcam Page.</a></p>
         <img src="cid:{stripped_powcam_cid}"
         </bod>
         </html>'''
