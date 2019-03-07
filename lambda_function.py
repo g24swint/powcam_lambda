@@ -29,7 +29,7 @@ def get_picture():
 
 def build_email():
     now = dt.datetime.now(tz=dt.timezone(dt.timedelta(hours=-7)))
-    time_is = f'{now.year}/{now.month:02}/{now.day:02} at {now.hour}:{now.minute} MDT'
+    time_is = f'{now.year}/{now.month:02}/{now.day:02} at {now.hour}:{now.minute:02} MDT'
     day_is = f'{now.year}/{now.month:02}/{now.day:02}'
     
     msg = EmailMessage()
